@@ -1,0 +1,69 @@
+\chapter{Bonds, Term Structures, and Credit}
+
+\section{Bond cash flows}
+A bond is a debt claim. A plain fixed-coupon bond pays coupons and returns principal at maturity. Let $F$ be face value, $c$ the annual coupon rate, $m$ the number of coupon payments per year, $y$ the yield per year compounded at frequency $m$, and $T$ the years to maturity. The coupon per period is $C=Fc/m$ and the number of periods is $N=mT$. Its clean price under the simple model is
+\formula{bondprice}
+  P=\sum_{k=1}^{N}\frac{C}{(1+y/m)^k}+\frac{F}{(1+y/m)^N}.
+\closeformula
+Every symbol has a mechanical interpretation: $k$ indexes payment dates, discounting uses the yield convention, and the final principal is discounted to the same date. A zero-coupon bond has no coupons, so $P=F/(1+y/m)^N$.
+
+Price and yield move in opposite directions for a fixed cash-flow schedule. That statement is a property of the discounting formula, not a claim that all observed bonds move together: cash flows, credit quality, liquidity, embedded options, and benchmark conventions also change.
+
+\begin{worked}
+An annual coupon bond has face value 1,000, coupon rate 5 percent, and two years to maturity. At a 4 percent yield, $P=50/1.04+1,050/1.04^2\approx1,018.86$. At a 6 percent yield, $P\approx981.67$. The 1 percentage-point yield change causes different price effects depending on the starting yield and cash-flow timing.
+\end{worked}
+
+\section{Accrued interest and conventions}
+A bond may be quoted on a clean-price basis that excludes accrued coupon, while the buyer pays the dirty price including accrued interest. Day-count conventions determine the fraction of a coupon period that has elapsed. Settlement calendars, business-day adjustments, ex-coupon dates, callable features, and inflation indexation are not cosmetic details; they change cash flows and valuation.
+
+\section{Duration and convexity}
+\keyterm{Macaulay duration} is the cash-flow-weighted average time to payment:
+\formula{macaulay}
+  D_M=\frac{\sum_{k=1}^{N} t_k\,PV(CF_k)}{P},
+\closeformula
+where $t_k$ is the time in years, $CF_k$ is the cash flow at that date, $PV(CF_k)$ is its present value, and $P$ is bond price. Modified duration under annual compounding is $D_{mod}=D_M/(1+y)$; under $m$ compounding, $D_{mod}=D_M/(1+y/m)$.
+
+For a small yield change $\Delta y$, duration gives the first-order approximation
+\formula{durationapprox}
+  \frac{\Delta P}{P}\approx-D_{mod}\Delta y.
+\closeformula
+Convexity captures curvature. Define
+\formula{convexity}
+  Conv=\frac{1}{P}\sum_{k=1}^{N}\frac{CF_k t_k(t_k+1)}{(1+y)^{t_k+2}}
+\closeformula
+for annual periods. A second-order approximation is
+\formula{convexityapprox}
+  \frac{\Delta P}{P}\approx-D_{mod}\Delta y+\frac{1}{2}Conv(\Delta y)^2.
+\closeformula
+The exact convexity formula changes with frequency and day count. Duration is not a promise of linear price behaviour; it is a local sensitivity.
+
+\section{Spot rates, forward rates, and the curve}
+The term structure is the relationship between maturity and interest rates. A spot rate $s_T$ is the discount rate for a single cash flow at time $T$. If a coupon bond's price is known, bootstrapping can infer spot rates from short to long maturities by solving for the discount factor $DF_T$:
+\formula{discountfactor}
+  P=\sum_{t=1}^{T}CF_tDF_t,\qquad DF_T=\frac{P-\sum_{t=1}^{T-1}CF_tDF_t}{CF_T}.
+\closeformula
+The implied annual effective spot rate is $s_T=DF_T^{-1/T}-1$. A forward rate is the rate implied between two future dates under the chosen compounding convention. No-arbitrage links spot and forward discount factors, but an implied forward rate is not necessarily an unbiased forecast of the future spot rate.
+
+The curve reflects expected short rates, term premia, inflation risk, liquidity, and supply and demand. The expectations hypothesis is a useful benchmark, not a settled description of every curve movement.
+
+\section{Credit risk}
+Credit risk is the possibility that a borrower fails to make promised payments or that its credit quality deteriorates. A simple expected-loss expression is
+\formula{expectedloss}
+  EL=PD\times LGD\times EAD,
+\closeformula
+where $PD$ is probability of default over the horizon, $LGD$ is loss given default as a fraction of exposure, and $EAD$ is exposure at default. Recovery may be collateral-dependent, time-dependent, and correlated with default conditions.
+
+Credit spreads compensate for expected loss, risk premia, liquidity, taxes, capital usage, and model uncertainty. A spread is therefore not identical to a default probability. Structural models link default to asset value and leverage; reduced-form models represent default with an intensity or hazard rate. Both are conditional tools.
+
+\section{Inflation-linked and floating-rate bonds}
+An inflation-linked bond adjusts principal or coupons using a published index, subject to a lag and legal convention. A floating-rate note resets its coupon against a reference rate plus a spread. Reset frequency, floors, caps, credit spread, and index fallback language matter. A quoted reference rate is not automatically risk-free, and benchmark reform can create contract risk.
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Price a two-year annual-coupon bond with face 1,000, coupon rate 6 percent, and yield 5 percent.
+  \item A bond has modified duration 4.2. Estimate its percentage price change when yield rises by 25 basis points.
+  \item Explain why convexity improves a duration-only estimate for a larger yield move.
+  \item If $PD=2\%$, $LGD=45\%$, and $EAD=5$ million, calculate one-year expected loss before discounting and dependence adjustments.
+\end{enumerate}
+\end{exerciseblock}
+

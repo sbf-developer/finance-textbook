@@ -1,0 +1,73 @@
+\chapter{Finance as Decisions Under Time and Risk}
+
+\section{The central problem}
+Finance studies how people and organisations move resources across time and uncertainty. A household saves part of current income to pay for a future education. A firm raises capital to build capacity whose cash flows arrive later. A pension fund exchanges current contributions for uncertain future benefits. A bank transforms short-term deposits into longer-term loans. These are different transactions, but each asks the same question: what is a future, risky claim worth today?
+
+The answer cannot be a number without a context. Value depends on the timing of cash flows, their uncertainty, the alternatives available to the decision-maker, taxes and transaction costs, and the legal rights attached to the claim. A useful discipline is therefore to write down the cash-flow distribution before choosing a valuation model.
+
+\begin{important}
+Finance is not primarily the art of forecasting a single price. It is the disciplined comparison of uncertain cash flows under explicit assumptions.
+\end{important}
+
+\section{Claims, cash flows, and balance sheets}
+A \keyterm{financial claim} is a contract or ownership right that entitles its holder to future cash flows or control rights. Debt normally promises specified payments and gives creditors priority in insolvency. Equity is a residual claim: shareholders receive what remains after contractual obligations, and often receive voting rights. An option gives a right, not an obligation, to transact under specified conditions.
+
+For a claim $i$, let $C_{i,t}$ be the cash flow received by its owner at time $t$. A cash-flow vector is
+\formula{cashvector}
+  \mathbf{C}_i=(C_{i,0},C_{i,1},\ldots,C_{i,T}).
+\closeformula
+Negative values represent payments by the holder. The same transaction looks different from the issuer's perspective because the sign is reversed. A financial statement is an organised description of a firm's resources, obligations, performance, and cash movements; it is not itself a valuation.
+
+The basic accounting identity is
+\formula{balanceidentity}
+  \text{Assets}=\text{Liabilities}+\text{Equity}.
+\closeformula
+Assets are controlled resources expected to produce benefits. Liabilities are present obligations. Equity is the residual interest. This identity is an accounting representation of claims on resources, not a guarantee that book values equal market values.
+
+\section{Return and wealth}
+Suppose an asset costs $P_0$ at the beginning of a period, pays a cash distribution $D_1$, and is worth $P_1$ at the end. The simple holding-period return is
+\formula{return}
+  R_1=\frac{P_1-P_0+D_1}{P_0}.
+\closeformula
+Here $P_0>0$ is the initial price, $P_1$ is the ending price, and $D_1$ is the cash distribution received during the period. The numerator is the investor's gain: price change plus distribution.
+
+If wealth is compounded through periods, the terminal wealth from initial wealth $W_0$ is
+\formula{wealthcompounding}
+  W_T=W_0\prod_{t=1}^{T}(1+R_t).
+\closeformula
+The geometric average return over $T$ periods is $\left(W_T/W_0\right)^{1/T}-1$. The arithmetic average is $T^{-1}\sum_tR_t$. They answer different questions: the arithmetic mean is useful for some expected-return calculations, while the geometric mean describes the realised compound growth rate.
+
+\begin{worked}
+An asset rises from 100 to 108 and pays a distribution of 2. The holding-period return is $(108-100+2)/100=0.10$, or 10 percent. If the next period return is -10 percent, two-period wealth is $100(1.10)(0.90)=99$. The arithmetic average is 0 percent, but the compounded result is a 1 percent loss. Volatility interacts with compounding.
+\end{worked}
+
+\section{Risk is multidimensional}
+Risk is not synonymous with volatility. Volatility measures dispersion of returns around a mean, but an investor may care about permanent loss, shortfall relative to liabilities, liquidity, inflation, counterparty default, model error, or the possibility of forced sale. A model should name the risk being measured.
+
+For a random return $R$, expected return is
+\formula{expectedreturn}
+  \E[R]=\sum_{s=1}^{n}p_sR_s
+\closeformula
+for a finite set of states $s$, where $p_s\geq0$ and $\sum_sp_s=1$. Variance is
+\formula{returnvariance}
+  \Var(R)=\E\left[(R-\E[R])^2\right],
+\closeformula
+and standard deviation is $\sigma_R=\sqrt{\Var(R)}$. Variance assigns the same mathematical weight to deviations above and below the mean. It is therefore a useful risk measure in some models, not a universal definition of risk.
+
+\section{No-arbitrage reasoning}
+An \keyterm{arbitrage} is a trading strategy that, under the stated model and trading rules, requires no net initial investment, has no possible loss, and has a positive gain in at least one state. In frictionless textbook models, competitive markets eliminate persistent arbitrage. In real markets, transaction costs, funding constraints, taxes, short-sale restrictions, latency, default risk, and model uncertainty mean that a theoretical price difference may not be exploitable.
+
+The law of one price says that two portfolios with identical future cash flows should have the same price when they can be traded under the same conditions. Much of derivatives pricing is a careful construction of two portfolios whose state-by-state payoffs match. The conclusion is conditional: if the replication is feasible and the assumptions hold, a price difference creates an arbitrage.
+
+\section{A map of the book}
+The rest of the book builds a chain. Accounting describes observed resources and obligations. Discounting converts future cash flows into present values. Portfolio theory describes how claims combine. Asset-pricing models connect expected returns to risk and preferences. Derivatives use replication and no-arbitrage. Quantitative finance adds probability, estimation, numerical algorithms, and software. Risk management asks whether the resulting decisions remain acceptable under adverse states.
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item A share is bought for 50, pays a dividend of 1.50, and is sold for 47. What is the holding-period return?
+  \item Explain why a book-value balance sheet can balance even when market values are changing every second.
+  \item A two-state return is 20 percent with probability 0.4 and -10 percent with probability 0.6. Calculate expected return and variance.
+  \item Give one reason why a theoretical arbitrage may not be executable in practice.
+\end{enumerate}
+\end{exerciseblock}
+

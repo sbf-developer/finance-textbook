@@ -1,0 +1,54 @@
+\chapter{Risk Management, Stress, and Systemic Exposure}
+
+\section{Risk governance}
+Risk management is a decision system, not a single statistic. It identifies exposures, defines acceptable losses and constraints, measures current and prospective risk, sets limits, monitors breaches, escalates exceptions, and tests whether the organisation can survive adverse states. Independent challenge and clear ownership matter because a model can be mathematically correct and operationally misused.
+
+\section{Value at Risk}
+For loss $L$ over horizon $h$ and confidence level $\alpha$, \keyterm{Value at Risk} is a quantile:
+\formula{var}
+  VaR_{\alpha}(L)=\inf\{\ell:\Prob(L\leq\ell)\geq\alpha\}.
+\closeformula
+At 99 percent, VaR is the loss threshold not exceeded in 99 percent of modelled outcomes. It does not describe the average loss beyond the threshold. It is sensitive to distribution, horizon scaling, liquidity assumptions, and the chosen confidence level.
+
+\section{Expected shortfall}
+Expected shortfall (ES) averages losses in the tail. For a continuous distribution,
+\formula{es}
+  ES_{\alpha}(L)=\E[L\given L\geq VaR_{\alpha}(L)].
+\closeformula
+For discontinuous distributions, the definition must handle the probability mass at the quantile carefully. ES provides more information about tail severity than VaR and has attractive mathematical properties in many settings, but it remains model-dependent and difficult to estimate precisely in thin samples.
+
+\section{Historical, parametric, and simulation methods}
+Historical risk uses past shocks and preserves observed dependence but assumes the past is relevant and sufficiently long. Parametric risk uses a distribution such as normal or Student-t and estimated covariance. Monte Carlo risk generates scenarios from a model. Hybrid methods combine historical innovations, stressed periods, and factor models.
+
+\section{Stress testing}
+Stress tests ask what happens under specified scenarios, such as a parallel rate rise, credit-spread widening, currency devaluation, volatility spike, liquidity haircut, or correlated equity fall. A scenario should be coherent: changing one variable without its likely accompanying effects can understate or overstate risk. Reverse stress testing begins with a failure outcome and asks which combinations of shocks could cause it.
+
+\section{Liquidity and leverage}
+Market liquidity is the ability to transact quickly with limited price impact. Funding liquidity is the ability to meet cash obligations. A position may be easy to mark but difficult to sell. Leverage magnifies both returns and losses:
+\formula{leverage}
+  \text{Equity return}\approx\frac{A}{E}\text{Asset return}-\frac{D}{E}\text{Funding cost},
+\closeformula
+where $A$ is asset value, $D$ debt, and $E$ equity. The approximation omits nonlinearities, margin, taxes, and changing financing.
+
+\section{Credit, counterparty, and wrong-way risk}
+Counterparty exposure depends on current mark-to-market, potential future exposure, collateral, netting, and the probability of default. Wrong-way risk occurs when exposure rises as the counterparty becomes less creditworthy. A hedge that reduces market risk can increase counterparty concentration. Netting agreements are legal and operational constructs, not assumptions that can be made without documentation.
+
+\section{Systemic risk}
+Systemic risk is the possibility that distress spreads through common exposures, interconnected claims, funding runs, fire sales, payment failures, or loss of confidence. Capital and liquidity buffers help but can interact with market dynamics. The ECB describes financial stability in terms of resilience of intermediaries, markets, and infrastructures, while Basel standards provide prudential frameworks rather than an all-purpose crisis forecast \cite{ecb2026,basel2019}.
+
+\section{Model risk}
+Model risk arises from incorrect theory, poor data, coding defects, unsuitable calibration, misuse, and change-management failures. Controls include independent validation, benchmark models, sensitivity analysis, challenger models, limits, documentation, versioning, and monitoring of model performance. A model's complexity should be justified by decision value; complexity can hide errors.
+
+\begin{worked}
+A portfolio has daily loss volatility of 1.5 percent and current value 1,000,000. A normal 99 percent one-day VaR uses $z_{0.99}\approx2.326$, giving approximately $2.326(0.015)(1,000,000)=34,890$ if mean loss is zero. This is a conditional illustration: the normal tail, liquidity, mean, and horizon assumptions are explicit, and the number is not a guarantee.
+\end{worked}
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item What does a 99 percent VaR fail to tell you about the worst 1 percent of outcomes?
+  \item Distinguish market liquidity from funding liquidity.
+  \item Give one example of wrong-way risk.
+  \item Why can a scenario analysis be more informative than a single historical percentile?
+\end{enumerate}
+\end{exerciseblock}
+

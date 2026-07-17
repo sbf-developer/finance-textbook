@@ -1,0 +1,48 @@
+\chapter{Equities, Currencies, Commodities, and Funds}
+
+\section{Equity claims}
+Common equity is a residual claim on a firm's assets after liabilities. Shareholders may receive dividends, vote, and benefit from value creation, but their payoff is uncertain and junior to debt. A stock price reflects the market's discounted assessment of future distributions, growth opportunities, risk, liquidity, and control rights. Market capitalisation is price per share times shares outstanding; enterprise value adds net debt and other claims under a stated definition.
+
+The dividend-discount model values equity as the present value of expected future dividends. For a constant-growth firm,
+\formula{ddm}
+  P_0=\frac{D_1}{r_E-g},
+\closeformula
+where $D_1$ is next-period dividend, $r_E$ is the required return on equity, and $g$ is the long-run dividend growth rate. The assumptions are strong: stable growth, $r_E>g$, and dividends that represent the relevant distributable cash flow. A firm that retains earnings can create value even when current dividends are small, so a cash-flow or residual-income model may be more suitable.
+
+Multiples such as price-to-earnings or enterprise-value-to-EBITDA are relative valuation tools. They are useful when comparable firms have similar growth, risk, accounting, and capital intensity. They do not remove the need to understand the denominator.
+
+\section{Foreign exchange}
+An exchange rate is a price: the number of units of one currency for one unit of another. The quote direction must be stated. Let $S_0$ be domestic currency per unit of foreign currency, $r_d$ the domestic interest rate, and $r_f$ the foreign interest rate. Covered interest parity under idealised no-arbitrage conditions gives the forward rate
+\formula{fxforward}
+  F_0=S_0\frac{1+r_dT}{1+r_fT}
+\closeformula
+for simple annual rates over horizon $T$. With continuous compounding, $F_0=S_0e^{(r_d-r_f)T}$. The relation assumes matched cash flows, funding access, no capital controls, and comparable credit and liquidity terms. Deviations can persist when balance-sheet constraints and basis risk matter.
+
+\section{Commodities}
+A commodity has a physical location, quality, storage cost, transport network, and delivery convention. The cost-of-carry relation links a spot price to a forward price. In a simplified continuous model,
+\formula{commoditycarry}
+  F_0=S_0e^{(r+u-y)T},
+\closeformula
+where $u$ is the proportional storage and insurance cost and $y$ is the convenience yield, the non-cash value of holding physical inventory. Scarcity, seasonality, inventories, and delivery constraints can make the convenience yield vary. A futures curve's slope is not a pure forecast of spot returns.
+
+\section{Funds and pooled vehicles}
+For a fund with assets $A$, liabilities $L$, and $N$ units, net asset value per unit is
+\formula{nav}
+  NAV=\frac{A-L}{N}.
+\closeformula
+The calculation depends on valuation time, pricing sources, accrued income, fees, and treatment of hard-to-price assets. An ETF can trade above or below its indicative NAV during the day, while creation and redemption mechanisms tend to link the trading price to portfolio value, subject to costs and market stress.
+
+Diversification is not the same as owning many names. A portfolio of assets exposed to the same factor, currency, funding source, or liquidity shock may remain concentrated. Look-through analysis is needed for funds, derivatives, and structured products.
+
+\section{Real assets and social claims}
+Real estate, infrastructure, intellectual property, and human capital generate cash flows outside public markets. Their valuation includes maintenance, vacancy, regulation, taxes, physical risk, and illiquidity. Finance should not treat marketability as a synonym for economic importance. Pension claims, insurance contracts, and public guarantees also distribute risks across generations and institutions.
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item A company will pay a dividend of 3 next year, equity required return is 9 percent, and stable growth is 3 percent. Value the share under the constant-growth model.
+  \item Spot FX is 7.00 domestic per foreign unit, $r_d=4\%$, $r_f=2\%$, and $T=1$. Find the simple-rate forward.
+  \item A fund owns assets worth 105 million, liabilities of 2 million, and 10 million units. Find NAV per unit.
+  \item Why can a commodity futures curve be upward sloping even if investors expect the future spot price to be unchanged?
+\end{enumerate}
+\end{exerciseblock}
+

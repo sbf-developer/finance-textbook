@@ -1,0 +1,66 @@
+\chapter{Probability, Statistics, and Econometrics for Finance}
+
+\section{Random variables and distributions}
+A \keyterm{random variable} maps an uncertain outcome to a number. A discrete random variable takes countable values; a continuous variable is described by a density. Its cumulative distribution function is $F(x)=\Prob(X\leq x)$. A probability model is useful only when its sample space, timing, and information set are clear.
+
+The expectation of a function $g(X)$ is
+\formula{expectationfunction}
+  \E[g(X)]=\sum_xg(x)\Prob(X=x)
+\closeformula
+for discrete $X$, or $\int g(x)f(x)\dd x$ for a continuous density $f$. Linearity, $\E[aX+b]=a\E[X]+b$, holds without independence. The variance identity
+\formula{varianceidentity}
+  \Var(X)=\E[X^2]-\E[X]^2
+\closeformula
+is often computationally convenient.
+
+For two variables, covariance is
+\formula{covariance}
+  \Cov(X,Y)=\E[(X-\E[X])(Y-\E[Y])],
+\closeformula
+and correlation is $\rho_{XY}=\Cov(X,Y)/(\sigma_X\sigma_Y)$ when both standard deviations are positive. Correlation is unit-free and measures linear association; zero correlation does not imply independence.
+
+\section{Conditional expectation and Bayes' rule}
+Conditional expectation updates a forecast using information $\mathcal{I}$: $\E[X\given\mathcal{I}]$. Bayes' rule is
+\formula{bayes}
+  \Prob(A\given B)=\frac{\Prob(B\given A)\Prob(A)}{\Prob(B)},
+\closeformula
+provided $\Prob(B)>0$. In finance, the event $A$ may be default and $B$ may be an observed spread, signal, or accounting outcome. Base rates matter: an apparently accurate signal can have a low positive predictive value when the event is rare.
+
+\section{Normality and its limits}
+The normal distribution is convenient because sums of independent shocks tend toward normality under central-limit conditions and because its moments are easy to compute. Yet asset returns often exhibit skewness, excess kurtosis, volatility clustering, jumps, and tail dependence. A normal model can be a local approximation or risk-factor model; it should not be treated as a law of nature.
+
+\section{Sampling and estimation}
+An estimator $\hat\theta$ is a rule that maps data to a parameter estimate. Bias is $\E[\hat\theta]-\theta$. The sample mean $\bar X=n^{-1}\sum_iX_i$ is unbiased for an iid population mean, but its realised error depends on the sample. The standard error of the iid sample mean is $s/\sqrt n$, where $s$ is sample standard deviation. Serial correlation, heteroskedasticity, data revisions, and overlapping returns can make this formula wrong.
+
+The law of large numbers describes convergence of sample averages under suitable dependence and moment conditions. The central limit theorem describes an approximate distribution for a normalised average under conditions that exclude extreme dependence or infinite variance. Neither theorem guarantees that a short financial sample is informative.
+
+\section{Regression}
+The linear regression model is
+\formula{regression}
+  y_t=\alpha+\beta x_t+\varepsilon_t,
+\closeformula
+where $y_t$ is the outcome, $x_t$ is a regressor, $\alpha$ is the intercept, $\beta$ is the conditional slope, and $\varepsilon_t$ is an error. Ordinary least squares chooses coefficients to minimise the sum of squared residuals. The slope has the covariance form
+\formula{olsbeta}
+  \hat\beta=\frac{\sum_t(x_t-\bar x)(y_t-\bar y)}{\sum_t(x_t-\bar x)^2}.
+\closeformula
+It estimates a causal effect only under additional assumptions, such as an appropriate design and exogeneity. In asset pricing, a factor regression can measure exposure and abnormal return relative to a model; an intercept is not automatically skill.
+
+\section{Hypothesis tests and multiple comparisons}
+A p-value is the probability, under a specified null model, of observing a statistic at least as extreme as the one observed. It is not the probability that the null is true, nor the economic magnitude of an effect. Confidence intervals and effect sizes should accompany tests. When many signals are searched, some appear significant by chance. Multiple-testing adjustments, out-of-sample evaluation, preregistration, and economic rationale help but do not eliminate research uncertainty.
+
+\section{Time-series issues}
+Financial observations are ordered. A process can be non-stationary in levels but stationary in returns. Autocorrelation in residuals, changing variance, structural breaks, and asynchronous trading affect inference. Robust standard errors, block bootstrap methods, state-space models, and explicit validation windows are tools for these problems, not automatic solutions.
+
+\begin{worked}
+Suppose a strategy has 60 monthly returns with sample mean 0.8 percent and sample standard deviation 4 percent. Under an iid approximation, the standard error of the mean is $0.04/\sqrt{60}\approx0.00516$, or 0.516 percentage points per month. The approximation is fragile if returns are correlated, costs are omitted, or the strategy was selected after examining the same 60 observations.
+\end{worked}
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item A return is 10 percent with probability 0.3 and -4 percent otherwise. Find its expected return.
+  \item Explain why zero correlation does not imply independence.
+  \item In a regression of an asset's excess return on market excess return, what does the slope represent under the model?
+  \item Why does testing 100 unrelated strategies at a 5 percent threshold create a false-discovery problem?
+\end{enumerate}
+\end{exerciseblock}
+

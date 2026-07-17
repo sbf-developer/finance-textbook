@@ -1,0 +1,33 @@
+\chapter{Dataset and Reproducibility Notes}
+
+\section{Simulated data}
+The files in \texttt{data/} contain simulated daily prices and returns for three assets named \texttt{Equity\_Sim}, \texttt{Bond\_Sim}, and \texttt{Commodity\_Sim}. They are generated from correlated geometric-Brownian-style innovations with a fixed seed and simple illustrative drifts and volatilities. They are not observations of investable assets, do not include trading costs, and must not be described as historical performance.
+
+The generator writes the data date range, seed, parameters, and column definitions to \texttt{data/README.md}. The same generator also creates two figures: simulated price paths and a mean-volatility scatter. The figures are diagnostic teaching aids, not performance claims.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.94\textwidth]{simulated_paths.png}
+  \caption{A reproducible set of simulated price paths. The paths are not historical observations or an investment forecast.}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.78\textwidth]{simulated_risk_return.png}
+  \caption{Arithmetic mean and volatility calculated from the same simulated returns. A sample point is not an expected-return claim.}
+\end{figure}
+
+\section{Using official data}
+For a real research project, replace the simulated files only after recording a source, retrieval date, licensing terms, units, frequency, corporate-action treatment, and revision policy. The SEC publishes financial-statement data sets extracted from XBRL filings \cite{secdata}. TreasuryDirect documents Treasury marketable securities and their conventions \cite{treasury2026}. Central banks publish official rates and financial-stability reports. Provider permissions and rate limits apply.
+
+\section{No performance guarantee}
+Historical data can be revised, incomplete, or non-representative. A strategy's future return distribution is not known from its past sample. Even a correctly reproduced historical result can fail because the market, costs, participants, regulation, or strategy capacity changes.
+
+\section{Reproduction command}
+From the package root, create an environment with NumPy, pandas, matplotlib, and pytest or the Python standard-library test runner. Run:
+\begin{verbatim}
+python code/finance_models.py --generate-data \\
+    --output-dir data --figure-dir figures
+python -m unittest discover -s code -p 'test_*.py' -v
+\end{verbatim}
+The code uses a fixed seed for the supplied output. Changing the seed creates another simulated sample and should change the numerical results.

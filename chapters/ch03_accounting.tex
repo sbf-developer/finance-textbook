@@ -1,0 +1,73 @@
+\chapter{Accounting Statements and Financial Analysis}
+
+\section{Accounting as a measurement system}
+Accounting records economic events using conventions. It separates transactions into periods, classifies resources and claims, and reports estimates such as depreciation, provisions, and impairment. The result is useful evidence, but it is not a complete inventory of economic value. Internally generated knowledge, employee capability, customer relationships, and option-like growth opportunities may be only partly recognised.
+
+The SEC's investor guide identifies four principal financial statements: the balance sheet, income statement, cash-flow statement, and statement of shareholders' equity \cite{secfinancialstatements}. The accompanying notes explain accounting policies, commitments, risks, and details that cannot fit on the face of the statements.
+
+\section{The balance sheet}
+The balance sheet is a snapshot at date $t$:
+\formula{balance}
+  A_t=L_t+E_t,
+\closeformula
+where $A_t$ is total assets, $L_t$ is total liabilities, and $E_t$ is equity. Current assets and current liabilities relate to near-term operating cycles; non-current items are expected to remain longer. Classification is not identical to liquidity: a marketable security may be current while a long-term loan can have a short-term covenant problem.
+
+\begin{worked}
+Suppose a firm has cash 20, receivables 30, inventory 40, property 110, and total assets 200. It has payables 25, debt 95, and equity 80. The identity holds: $200=25+95+80$. If the market value of property falls by 20 but the books have not yet recognised an impairment, the accounting identity still holds but the economic value has changed.
+\end{worked}
+
+\section{The income statement}
+The income statement reports revenue and expenses over a period. A simplified structure is
+\formula{income}
+  \text{Net income}=\text{Revenue}-\text{Operating costs}-\text{Interest}-\text{Taxes}.
+\closeformula
+Accrual accounting recognises revenue and expenses when earned or incurred under the applicable standard, not only when cash changes hands. This improves matching across periods but introduces estimates and timing choices.
+
+Important distinctions include gross profit versus operating profit, operating profit versus earnings before interest and taxes (EBIT), and net income versus cash generated. A high net income can coexist with weak cash flow if receivables grow, inventory accumulates, or earnings include non-cash gains.
+
+\section{Cash-flow statement}
+The cash-flow statement reconciles cash at the beginning and end of a period. It normally separates operating, investing, and financing flows. Under the indirect method, operating cash flow begins with net income and adjusts for non-cash items and working-capital movements:
+\formula{ocf}
+  \text{CFO}=\text{Net income}+\text{non-cash charges}-\Delta\text{operating assets}+\Delta\text{operating liabilities}.
+\closeformula
+An increase in receivables is usually a use of cash because revenue has been recognised before collection. An increase in payables is usually a source of operating cash because expenses have been recognised before payment. The SEC highlights the cash-flow statement's role in assessing future cash generation, obligations, dividends, financing needs, and differences between net income and cash receipts \cite{secfinancialstatements}.
+
+\section{Ratios and decomposition}
+Ratios are comparisons, not conclusions. They are meaningful only with a defined numerator, denominator, time period, accounting basis, and peer or historical benchmark.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+\toprule
+Ratio & Interpretation and caution \\
+\midrule
+Current ratio $=\text{current assets}/\text{current liabilities}$ & Short-term coverage; may hide illiquid inventory. \\
+Debt-to-equity $=\text{debt}/\text{equity}$ & Financial leverage; book and market denominators differ. \\
+Operating margin $=\text{EBIT}/\text{revenue}$ & Operating profitability; compare similar accounting classifications. \\
+ROA $=\text{net income}/\text{average assets}$ & Return on accounting assets; asset age and intangibles matter. \\
+ROE $=\text{net income}/\text{average equity}$ & Return to common equity; leverage can raise ROE while raising risk. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The DuPont decomposition makes the mechanism behind ROE visible:
+\formula{dupont}
+  \text{ROE}=\frac{\text{Net income}}{\text{Revenue}}
+  \times\frac{\text{Revenue}}{\text{Assets}}
+  \times\frac{\text{Assets}}{\text{Equity}}.
+\closeformula
+The three terms are profit margin, asset turnover, and equity multiplier. A higher ROE can result from higher margins, more efficient asset use, or more leverage; the ratio alone does not distinguish good operating performance from balance-sheet risk.
+
+\section{Analysis workflow}
+An analyst should first define the question: solvency, profitability, growth, valuation, liquidity, or covenant capacity. Next, read the statements and notes, identify accounting policies, normalise unusual items, calculate ratios consistently, compare across time and peers, and reconcile reported earnings to cash. The SEC notes that Form 10-K and Form 10-Q provide detailed information about operations, risks, and financial results and that management certifications and disclosure rules matter \cite{sec10k}.
+
+Common traps include confusing correlation with causation, mixing quarterly and annual denominators, treating non-GAAP measures as standardised, ignoring dilution, double-counting debt, and treating a ratio as an industry law. Financial statement data sets extracted from XBRL can be downloaded from the SEC, but tags, restatements, dimensions, units, and filing dates require careful cleaning \cite{secdata}.
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item A firm reports revenue 500, EBIT 75, net income 40, average assets 400, and average equity 160. Compute operating margin and ROE.
+  \item Receivables rise by 12 while payables fall by 4. Holding other operating items fixed, how does this affect operating cash flow?
+  \item A firm has margin 8 percent, asset turnover 1.5, and equity multiplier 2. What is ROE under the DuPont identity?
+  \item Give two reasons why comparing two firms' debt-to-equity ratios can be misleading.
+\end{enumerate}
+\end{exerciseblock}
+

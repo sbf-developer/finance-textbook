@@ -1,0 +1,45 @@
+\chapter{Forwards, Futures, and Swaps}
+
+\section{Forward contracts}
+A forward is a private agreement to transact an underlying at a future date for a price fixed today. One party is long and the other short. At initiation, the contract can be designed to have approximately zero value, but its value changes as the underlying price, funding rate, dividends, credit quality, and time change.
+
+For a non-income-producing asset with spot price $S_0$, continuously compounded risk-free rate $r$, and maturity $T$, cash-and-carry gives
+\formula{forwardprice}
+  F_0=S_0e^{rT}.
+\closeformula
+Buying the asset today and financing it to maturity costs $S_0e^{rT}$. A forward with a different price could be combined with that strategy to create a theoretical arbitrage. If the asset pays known income with present value $I$, then $F_0=(S_0-I)e^{rT}$. If it has continuous proportional yield $q$, then $F_0=S_0e^{(r-q)T}$.
+
+The value at time $t$ of a long forward with delivery price $K$ is, in the simple continuous model, $V_t=(S_t-I_{t,T})-Ke^{-r(T-t)}$ after matching the remaining income convention. A real contract can also have collateral, credit, funding basis, and settlement terms.
+
+\section{Futures}
+A futures contract is standardised and exchange-traded, with daily marking to market and margin. The CFTC describes a commodity futures contract as an agreement fixing price and quantity for future delivery, with many contracts closed before delivery and some cash-settled \cite{cftc2026}. The daily cash-flow pattern means a futures price need not equal a forward price when interest rates and the underlying price are correlated.
+
+Initial margin is a performance deposit, not a down payment that limits losses. Variation margin transfers gains and losses as the contract is marked. A margin call can force liquidation even when a longer-run hedge is economically sensible.
+
+\section{Basis and hedging}
+The \keyterm{basis} is often defined as spot minus futures price, but conventions differ. A producer can hedge a future sale by shorting futures; a consumer can hedge a purchase by going long. The hedge is imperfect if the contract's maturity, location, grade, quantity, or price sensitivity differs from the exposure. Basis risk may dominate residual risk.
+
+\section{Interest-rate swaps}
+In a plain-vanilla interest-rate swap, one party pays a fixed rate and receives a floating reference rate on a notional principal, while the counterparty does the reverse. The notional is usually not exchanged. The fixed rate at inception is set so the present value of fixed and expected floating legs match under the pricing curve and collateral convention. The swap's value later is the difference between the two legs.
+
+For payment dates $t_i$, year fractions $\delta_i$, discount factors $DF_i$, and forward rates $L_i$, the par fixed rate is
+\formula{parswap}
+  K_{swap}=\frac{\sum_i DF_i\,\delta_i L_i}{\sum_i DF_i\,\delta_i}.
+\closeformula
+This is a pricing identity under a single-curve classroom model. Modern collateralised markets may use separate discounting and projection curves, and fallback language matters.
+
+\section{Cross-currency swaps}
+A cross-currency swap exchanges principal and interest in two currencies. It can transform funding exposure but introduces exchange-rate risk, basis risk, counterparty risk, and liquidity requirements. Notional exchange at maturity is a real cash-flow obligation, not a notational detail.
+
+\section{What can go wrong}
+Derivative contracts fail through wrong-way counterparty exposure, collateral disputes, model error, settlement failures, legal uncertainty, benchmark transition, and liquidity spirals. Central clearing and margin reduce bilateral exposure but can increase procyclical liquidity pressure. A hedge that is perfect in a spreadsheet can be poor when the exposure is measured at the wrong horizon or when financing terms change.
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Spot price is 100, continuously compounded rate is 4 percent, and maturity is six months. Find the non-income-producing forward price.
+  \item Explain the difference between initial margin and a loss limit.
+  \item In a swap, what does the notional do if it is not exchanged?
+  \item Name two sources of basis risk in a commodity hedge.
+\end{enumerate}
+\end{exerciseblock}
+

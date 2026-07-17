@@ -1,0 +1,291 @@
+\documentclass[11pt,oneside,openany]{book}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper,top=25mm,bottom=25mm,left=28mm,right=25mm,headheight=23pt]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,longtable,array,tabularx,multirow}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{xcolor}
+\definecolor{navy}{HTML}{0B1F33}
+\definecolor{slate}{HTML}{334155}
+\definecolor{muted}{HTML}{64748B}
+\definecolor{rulegray}{HTML}{CBD5E1}
+\definecolor{lightblue}{HTML}{EFF6FF}
+\definecolor{lightgray}{HTML}{F8FAFC}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage[noautomatic]{imakeidx}
+\usepackage{etoolbox}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=navy,
+  citecolor=slate,
+  urlcolor=slate,
+  pdftitle={Finance and Quantitative Markets},
+  pdfauthor={Scott Brodie Forsyth}
+}
+
+\makeindex
+\setstretch{1.08}
+\emergencystretch=2em
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[itemize]{leftmargin=*,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=*,itemsep=3pt,topsep=3pt}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{navy}}
+  {\filleft\Large\chaptertitlename\ \thechapter}
+  {8pt}
+  {\Huge\filright}
+  [\vspace{5pt}\color{rulegray}\titlerule]
+\titleformat{\section}{\Large\bfseries\color{navy}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{slate}}{\thesubsection}{0.7em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+\titlespacing*{\section}{0pt}{16pt}{5pt}
+\titlespacing*{\subsection}{0pt}{12pt}{3pt}
+
+\pagestyle{fancy}
+\setlength{\headheight}{23pt}
+\fancyhf{}
+\fancyhead[L]{\small\color{muted}Finance and Quantitative Markets}
+\fancyhead[R]{\small\color{muted}Chapter \thechapter}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\lstset{
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{navy}\bfseries,
+  commentstyle=\color{muted}\itshape,
+  stringstyle=\color{slate},
+  showstringspaces=false,
+  frame=single,
+  rulecolor=\color{rulegray},
+  backgroundcolor=\color{lightgray},
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  numbers=left,
+  numberstyle=\tiny\color{muted},
+  numbersep=7pt
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\given}{\,|\,}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\source}[1]{\par\smallskip{\footnotesize\color{muted}Source note: #1}\par}
+\newcommand{\keyterm}[1]{\textbf{#1}\index{#1}}
+\newcommand{\formula}[1]{\begin{equation}\label{#1}}
+\newcommand{\closeformula}{\end{equation}}
+\newenvironment{important}{\begin{quote}\itshape\color{slate}}{\end{quote}}
+\newenvironment{worked}{\begin{quote}\small\textbf{Worked example.}\ }{\end{quote}}
+\newenvironment{exerciseblock}{\begin{quote}\small\textbf{Exercises.}\ }{\end{quote}}
+\newenvironment{solutionblock}{\begin{quote}\small\textbf{Solution.}\ }{\end{quote}}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+  \pagecolor{navy}
+  \color{white}
+  \vspace*{0.20\textheight}
+  {\Huge\bfseries FINANCE\\[7pt]AND QUANTITATIVE MARKETS\par}
+  \vspace{18pt}
+  {\Large Value, Risk, Decisions, and Financial Systems\par}
+  \vfill
+  {\large Scott Brodie Forsyth\par}
+  \vspace{10pt}
+  {\small First edition | 17 July 2026\par}
+\end{titlepage}
+\nopagecolor
+\color{black}
+\hypersetup{pageanchor=true}
+
+\frontmatter
+
+\chapter*{Copyright and use}
+This educational manuscript is an independent textbook. It is not investment, tax, accounting, legal, or regulatory advice. Examples are for learning and may omit facts that matter in a real transaction. A security that appears in an example is not a recommendation. Prices, returns, and simulated paths do not predict future outcomes.
+
+The book is designed to be reproducible. Calculations in the text use either exact symbolic inputs, transparently rounded classroom inputs, or the simulated data supplied with the source package. Regulatory statements are scoped to the jurisdictions and date stated in the text. Laws, rules, products, and market conventions change; readers making real decisions should consult the relevant current authority and professional advisers.
+
+\chapter*{How to use this book}
+The first half develops the language of finance: claims, cash flows, discounting, accounting, assets, and corporate decisions. The second half adds probability, statistics, portfolio theory, derivatives, stochastic models, numerical methods, and risk. Each chapter moves through intuition, formal definitions, assumptions, worked calculations, limitations, and exercises. The Python and spreadsheet files are companion laboratories, not black boxes: every major function is short enough to inspect and test.
+
+The symbol $t$ denotes time, $0$ is the valuation date, and $T$ is a future date unless a chapter says otherwise. Rates are annual effective rates unless a compounding frequency is written explicitly. Dollar signs in examples mean generic currency units; the methods are not tied to the United States.
+
+\chapter*{Data, evidence, and scope}
+This edition was checked on 17 July 2026. The book distinguishes three kinds of statements:
+
+\begin{itemize}
+  \item \textit{identities and derivations}, which follow from definitions and stated assumptions;
+  \item \textit{empirical claims}, which are linked to published research or official data documentation; and
+  \item \textit{current institutional claims}, which carry a date and a source because they can change.
+\end{itemize}
+
+The executable dataset is simulated with a fixed random seed. It is intentionally not presented as historical market performance. The source package also documents legal routes for replacing it with official observations, such as SEC XBRL financial-statement data, Treasury security documentation, or a central-bank data API, subject to the terms of each provider.
+
+\tableofcontents
+\listoffigures
+
+\mainmatter
+
+\input{chapters/ch01_foundations}
+\input{chapters/ch02_system}
+\input{chapters/ch03_accounting}
+\input{chapters/ch04_time_value}
+\input{chapters/ch05_fixed_income}
+\input{chapters/ch06_assets}
+\input{chapters/ch07_corporate_finance}
+\input{chapters/ch08_probability}
+\input{chapters/ch09_portfolios}
+\input{chapters/ch10_efficiency}
+\input{chapters/ch11_stochastic}
+\input{chapters/ch12_forwards_futures_swaps}
+\input{chapters/ch13_options}
+\input{chapters/ch14_numerical_quant}
+\input{chapters/ch15_risk}
+\input{chapters/ch16_backtesting}
+\input{chapters/ch17_crises_ethics}
+\input{chapters/ch18_integrated_case}
+
+\appendix
+\input{chapters/app_a_math}
+\input{chapters/app_b_formula_sheet}
+\input{chapters/app_c_python}
+\input{chapters/app_d_data}
+\input{chapters/app_e_glossary}
+\input{chapters/app_f_exercises_solutions}
+
+\backmatter
+
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+\begin{thebibliography}{99}
+
+\bibitem{arrow1964}
+Arrow, K. J. (1964). \textit{The Role of Securities in the Optimal Allocation of Risk-Bearing}. Review of Economic Studies, 31(2), 91--96. doi:10.2307/2296188.
+
+\bibitem{basel2019}
+Basel Committee on Banking Supervision. (2019, current framework consulted 2026). \textit{Minimum capital requirements for market risk}. Bank for International Settlements. \url{https://www.bis.org/bcbs/publ/d457.htm}
+
+\bibitem{basel3}
+Basel Committee on Banking Supervision. (2017, framework current 2026). \textit{Basel III: Finalising post-crisis reforms}. Bank for International Settlements. \url{https://www.bis.org/bcbs/publ/d424.htm}
+
+\bibitem{blackscholes1973}
+Black, F., and Scholes, M. (1973). The pricing of options and corporate liabilities. \textit{Journal of Political Economy}, 81(3), 637--654. doi:10.1086/260062.
+
+\bibitem{bollerslev1986}
+Bollerslev, T. (1986). Generalized autoregressive conditional heteroskedasticity. \textit{Journal of Econometrics}, 31(3), 307--327. doi:10.1016/0304-4076(86)90063-1.
+
+\bibitem{cftc2026}
+U.S. Commodity Futures Trading Commission. (2026). \textit{Futures market basics}. \url{https://www.cftc.gov/LearnAndProtect/AdvisoriesAndArticles/FuturesMarketBasics/index.htm}
+
+\bibitem{cochrane2005}
+Cochrane, J. H. (2005). \textit{Asset Pricing}. Revised edition. Princeton University Press.
+
+\bibitem{cont2001}
+Cont, R. (2001). Empirical properties of asset returns: Stylized facts and statistical issues. \textit{Quantitative Finance}, 1(2), 223--236. doi:10.1080/713665670.
+
+\bibitem{ecb2026}
+European Central Bank. (2026, May 19). \textit{Financial Stability Review}. \url{https://www.ecb.europa.eu/press/financial-stability-publications/fsr/html/ecb.fsr202605~50566915a7.en.html}
+
+\bibitem{engle1982}
+Engle, R. F. (1982). Autoregressive conditional heteroscedasticity with estimates of the variance of United Kingdom inflation. \textit{Econometrica}, 50(4), 987--1007. doi:10.2307/1912773.
+
+\bibitem{fama1970}
+Fama, E. F. (1970). Efficient capital markets: A review of theory and empirical work. \textit{Journal of Finance}, 25(2), 383--417. doi:10.2307/2325486.
+
+\bibitem{famafrench1993}
+Fama, E. F., and French, K. R. (1993). Common risk factors in the returns on stocks and bonds. \textit{Journal of Financial Economics}, 33(1), 3--56. doi:10.1016/0304-405X(93)90023-5.
+
+\bibitem{famafrench2015}
+Fama, E. F., and French, K. R. (2015). A five-factor asset pricing model. \textit{Journal of Financial Economics}, 116(1), 1--22. doi:10.1016/j.jfineco.2014.10.010.
+
+\bibitem{federalreserve2025}
+Board of Governors of the Federal Reserve System. (2025). \textit{Financial Stability Report}. \url{https://www.federalreserve.gov/publications/financial-stability-report.htm}
+
+\bibitem{hull2022}
+Hull, J. C. (2022). \textit{Options, Futures, and Other Derivatives} (11th ed.). Pearson.
+
+\bibitem{ianes2011}
+International Organization of Securities Commissions. (2011). \textit{Principles for Financial Market Infrastructures}. Committee on Payment and Settlement Systems and Technical Committee of IOSCO. \url{https://www.bis.org/cpmi/publ/d101a.pdf}
+
+\bibitem{jensen1968}
+Jensen, M. C. (1968). The performance of mutual funds in the period 1945--1964. \textit{Journal of Finance}, 23(2), 389--416. doi:10.2307/2325404.
+
+\bibitem{kahneman1979}
+Kahneman, D., and Tversky, A. (1979). Prospect theory: An analysis of decision under risk. \textit{Econometrica}, 47(2), 263--291. doi:10.2307/1914185.
+
+\bibitem{kelly1956}
+Kelly, J. L. (1956). A new interpretation of information rate. \textit{Bell System Technical Journal}, 35(4), 917--926. doi:10.1002/j.1538-7305.1956.tb03809.x.
+
+\bibitem{lakonishok1994}
+Lakonishok, J., Shleifer, A., and Vishny, R. W. (1994). Contrarian investment, extrapolation, and risk. \textit{Journal of Finance}, 49(5), 1541--1578. doi:10.2307/2329452.
+
+\bibitem{merton1973}
+Merton, R. C. (1973). Theory of rational option pricing. \textit{Bell Journal of Economics and Management Science}, 4(1), 141--183. doi:10.2307/3003143.
+
+\bibitem{modigliani1958}
+Modigliani, F., and Miller, M. H. (1958). The cost of capital, corporation finance and the theory of investment. \textit{American Economic Review}, 48(3), 261--297.
+
+\bibitem{modigliani1963}
+Modigliani, F., and Miller, M. H. (1963). Corporate income taxes and the cost of capital: A correction. \textit{American Economic Review}, 53(3), 433--443.
+
+\bibitem{markowitz1952}
+Markowitz, H. (1952). Portfolio selection. \textit{Journal of Finance}, 7(1), 77--91. doi:10.2307/2975974.
+
+\bibitem{mcfadden1974}
+McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (ed.), \textit{Frontiers in Econometrics}. Academic Press.
+
+\bibitem{mishkin2019}
+Mishkin, F. S. (2019). \textit{The Economics of Money, Banking, and Financial Markets} (12th ed.). Pearson.
+
+\bibitem{secfinancialstatements}
+U.S. Securities and Exchange Commission. (2007). \textit{Beginner's guide to financial statements}. \url{https://www.sec.gov/about/reports-publications/investorpubsbegfinstmtguide}
+
+\bibitem{sec10k}
+U.S. Securities and Exchange Commission. (2021). \textit{How to read a 10-K/10-Q}. \url{https://www.sec.gov/resources-for-investors/investor-alerts-bulletins/how-read-10-k10-q}
+
+\bibitem{secdata}
+U.S. Securities and Exchange Commission. (2026). \textit{Financial statement data sets}. \url{https://www.sec.gov/data-research/sec-markets-data/financial-statement-data-sets}
+
+\bibitem{sharpe1964}
+Sharpe, W. F. (1964). Capital asset prices: A theory of market equilibrium under conditions of risk. \textit{Journal of Finance}, 19(3), 425--442. doi:10.2307/2977928.
+
+\bibitem{shiller1981}
+Shiller, R. J. (1981). Do stock prices move too much to be justified by subsequent changes in dividends? \textit{American Economic Review}, 71(3), 421--436.
+
+\bibitem{sortino1994}
+Sortino, F. A., and Price, L. N. (1994). Performance measurement in a downside risk framework. \textit{Journal of Investing}, 3(3), 59--64.
+
+\bibitem{treasury2026}
+U.S. Department of the Treasury. (2026). \textit{Marketable securities and glossary}. TreasuryDirect. \url{https://www.treasurydirect.gov/marketable-securities/}
+
+\bibitem{tsay2010}
+Tsay, R. S. (2010). \textit{Analysis of Financial Time Series} (3rd ed.). Wiley.
+
+\bibitem{white2000}
+White, H. (2000). A reality check for data snooping. \textit{Econometrica}, 68(5), 1097--1126. doi:10.2307/2999436.
+
+\end{thebibliography}
+
+\printindex
+
+\end{document}

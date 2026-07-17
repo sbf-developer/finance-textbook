@@ -1,0 +1,91 @@
+\chapter{Options, No-Arbitrage, and Hedging}
+
+\section{Payoffs}
+A European call gives the holder the right to buy an underlying for strike $K$ at maturity $T$. Its payoff is
+\formula{callpayoff}
+  C_T=\max(S_T-K,0).
+\closeformula
+A European put gives the right to sell:
+\formula{putpayoff}
+  P_T=\max(K-S_T,0).
+\closeformula
+The option premium is paid at initiation. It is not the same as the maximum possible loss for the option writer, whose loss can be much larger for an uncovered call.
+
+Options can hedge, insure, transfer convexity, or express views. The payoff is nonlinear: a small change in the underlying can have a different effect at different prices and times.
+
+\section{Bounds and parity}
+For a non-dividend-paying stock, a European call must satisfy $0\leq C_0\leq S_0$ and a put must satisfy $0\leq P_0\leq Ke^{-rT}$. A call with value below $S_0-Ke^{-rT}$ would violate a lower-bound portfolio argument. Put-call parity is
+\formula{putcallparity}
+  C_0-P_0=S_0-Ke^{-rT}
+\closeformula
+under continuous compounding and no dividends. With a known continuous dividend yield $q$, the stock term becomes $S_0e^{-qT}$:
+\formula{dividendparity}
+  C_0-P_0=S_0e^{-qT}-Ke^{-rT}.
+\closeformula
+Parity is a relationship among prices of matched contracts; exercise style, dividends, funding, and settlement conventions must match.
+
+\section{Binomial model}
+In a one-period binomial model, the stock is $S_0$ today and becomes $S_u$ or $S_d$ at maturity. A call pays $C_u$ or $C_d$. Choose $\Delta$ shares and a bond position $B$ so
+\[\Delta S_u+B(1+r)=C_u,\qquad \Delta S_d+B(1+r)=C_d.\]
+Subtracting gives
+\formula{binomialdelta}
+  \Delta=\frac{C_u-C_d}{S_u-S_d}.
+\closeformula
+The replicating portfolio costs $\Delta S_0+B$. The no-arbitrage price is that cost. Defining a risk-neutral probability
+\formula{riskneutralprob}
+  q=\frac{(1+r)S_0-S_d}{S_u-S_d},
+\closeformula
+the same price is $[qC_u+(1-q)C_d]/(1+r)$, provided $0<q<1$ and rates and payoffs use the same period.
+
+\section{Black-Scholes-Merton}
+For a European call on a non-dividend-paying asset, the Black-Scholes-Merton price is
+\formula{bsmcall}
+  C_0=S_0N(d_1)-Ke^{-rT}N(d_2),
+\closeformula
+where
+\formula{bsmd}
+  d_1=\frac{\ln(S_0/K)+(r+\tfrac12\sigma^2)T}{\sigma\sqrt{T}},
+  \qquad d_2=d_1-\sigma\sqrt{T}.
+\closeformula
+Here $N(\cdot)$ is the standard normal cumulative distribution function, $\sigma$ is the annualised volatility parameter, $r$ is a continuously compounded risk-free rate, and $T$ is years. With continuous dividend yield $q$, the call becomes $S_0e^{-qT}N(d_1)-Ke^{-rT}N(d_2)$ and $r$ inside $d_1$ becomes $r-q$.
+
+The model assumes frictionless continuous trading, lognormal diffusion, constant volatility and rate, no arbitrage, and European exercise. Its formula can be useful even when assumptions are false because market prices often express an implied volatility under the model. Implied volatility is a quote transformation, not a direct observation of future volatility.
+
+\section{A derivation map}
+The derivation combines a self-financing delta hedge with Ito's lemma. Let option value be $V(S,t)$. Ito's lemma gives
+\formula{itooption}
+  \dd V=\left(V_t+\mu S V_S+\tfrac12\sigma^2S^2V_{SS}\right)\dd t+\sigma S V_S\dd W_t.
+\closeformula
+Holding $-V_S$ shares against one option removes the $\dd W_t$ term. If the portfolio earns the risk-free rate, the resulting partial differential equation is
+\formula{bsmpde}
+  V_t+\tfrac12\sigma^2S^2V_{SS}+rSV_S-rV=0,
+\closeformula
+with terminal condition $V(S,T)=\max(S-K,0)$ for a call. Solving the PDE yields the BSM formula. The drift $\mu$ disappears from the pricing equation because the hedge removes the local diffusion risk; it has not been assumed that the real-world drift equals $r$.
+
+\section{Greeks and hedging}
+The main sensitivities are:
+\begin{itemize}
+  \item delta $\Delta=\partial V/\partial S$, sensitivity to the underlying;
+  \item gamma $\Gamma=\partial^2V/\partial S^2$, change in delta;
+  \item vega $\partial V/\partial\sigma$, sensitivity to implied volatility;
+  \item theta $\partial V/\partial t$, time decay under a convention;
+  \item rho $\partial V/\partial r$, rate sensitivity.
+\end{itemize}
+Delta hedging is local. Gamma, volatility changes, jumps, discrete rebalancing, transaction costs, and model error create residual risk. A delta-neutral position can lose money while the underlying moves because gamma and vega matter.
+
+\section{American exercise and model extensions}
+An American option can be exercised before expiry. Early exercise may be optimal for some puts and dividend-paying calls; an American call on a non-dividend-paying stock is generally not exercised early in the idealised model because time value is lost. Lattices, finite-difference methods, and simulation-based methods extend the framework. Stochastic volatility, local volatility, jumps, rates, dividends, and credit create new parameters and calibration problems rather than a single universally correct model.
+
+\begin{worked}
+A one-period stock is 100 today and becomes 120 or 80. A one-period gross risk-free return is 1.05. A call with strike 100 pays 20 in the up state and 0 in the down state. Delta is $(20-0)/(120-80)=0.5$. Solve $0.5(120)+B(1.05)=20$ to get $B=-38.0952$. The replicating cost is $0.5(100)-38.0952=11.9048$. The risk-neutral probability is $[(1.05)(100)-80]/40=0.625$, giving $[0.625(20)]/1.05=11.9048$.
+\end{worked}
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Compute the payoff of a call with strike 50 when the underlying ends at 62, and of a put with the same strike.
+  \item State the economic intuition behind put-call parity.
+  \item In the binomial example, interpret the hedge ratio $\Delta=0.5$.
+  \item Why can an implied-volatility surface vary by strike and maturity if BSM uses one constant $\sigma$?
+\end{enumerate}
+\end{exerciseblock}
+

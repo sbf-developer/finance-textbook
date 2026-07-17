@@ -1,0 +1,83 @@
+\chapter{Time Value of Money and Valuation}
+
+\section{Why time changes value}
+One unit of currency today can be invested, consumed, or used to reduce borrowing. A future unit is uncertain and unavailable until its date. \keyterm{Discounting} translates future cash flows into an equivalent present value using a rate that represents time preference, opportunity cost, risk, or a combination of these.
+
+If one currency unit grows at annual effective rate $r$ for $T$ periods, its future value is
+\formula{fv}
+  FV_T=PV_0(1+r)^T,
+\closeformula
+where $PV_0$ is present value. Solving for present value gives
+\formula{pv}
+  PV_0=\frac{FV_T}{(1+r)^T}.
+\closeformula
+The symbol $r$ must match the period and cash-flow convention. If a quoted nominal annual rate $j$ compounds $m$ times per year, the per-period rate is $j/m$ and the number of periods over $T$ years is $mT$:
+\formula{nominal}
+  FV_T=PV_0\left(1+\frac{j}{m}\right)^{mT}.
+\closeformula
+
+With continuous compounding, $FV_T=PV_0e^{rT}$, where $e$ is the base of the natural logarithm. Continuous compounding is a mathematical convention, not evidence that cash compounds continuously in a bank account.
+
+\section{Annuities and perpetuities}
+An ordinary annuity pays $C$ at the end of each of $n$ periods. For $r\ne0$,
+\formula{annuity}
+  PV_0=C\frac{1-(1+r)^{-n}}{r}.
+\closeformula
+To derive it, write the cash flows as a finite geometric series:
+\[PV_0=\frac{C}{1+r}+\frac{C}{(1+r)^2}+\cdots+\frac{C}{(1+r)^n}.\]
+Multiplying by $1+r$ and subtracting the original series leaves $C-C(1+r)^{-n}$, which gives the formula. An annuity due pays at the beginning of each period, so its value is the ordinary annuity value multiplied by $1+r$.
+
+A level perpetuity pays $C$ forever beginning one period from now:
+\formula{perpetuity}
+  PV_0=\frac{C}{r},\qquad r>0.
+\closeformula
+For a growing perpetuity with growth $g$ and $r>g$,
+\formula{gordon}
+  PV_0=\frac{C_1}{r-g},
+\closeformula
+where $C_1$ is the cash flow one period from now. The condition $r>g$ is not a detail: without it the infinite series does not converge to a finite value.
+
+\begin{worked}
+An annuity pays 1,000 at each year-end for five years. At an 8 percent annual discount rate, $PV=1000[1-(1.08)^{-5}]/0.08\approx3,992.71$. If the first payment arrives immediately, the annuity-due value is approximately $4,312.13$. Moving the payments one period changes value materially.
+\end{worked}
+
+\section{Inflation and real returns}
+Let $r_n$ be a nominal return and $\pi$ the inflation rate. The exact real return is
+\formula{realreturn}
+  1+r_{real}=\frac{1+r_n}{1+\pi},
+\closeformula
+so $r_{real}=(r_n-\pi)/(1+\pi)$. The approximation $r_{real}\approx r_n-\pi$ is useful for small rates but is not an identity. A valuation must use cash flows and discount rates in the same price basis: nominal cash flows with nominal rates, or real cash flows with real rates.
+
+\section{NPV, IRR, and decision rules}
+For cash flows $C_t$ including the initial outlay, net present value is
+\formula{npv}
+  NPV=\sum_{t=0}^{T}\frac{C_t}{(1+r)^t}.
+\closeformula
+An investment with $NPV>0$ adds value relative to the discount rate and the model's cash flows. The \keyterm{internal rate of return} is a rate $r^*$ satisfying $0=\sum_tC_t/(1+r^*)^t$. IRR can be ambiguous with multiple sign changes, and it can rank mutually exclusive projects incorrectly when scale or timing differs. NPV at a justified opportunity cost is generally the more stable decision rule.
+
+\section{DCF valuation}
+A discounted-cash-flow valuation forecasts free cash flow, chooses a discount rate consistent with risk and financing, and discounts the forecast. For an unlevered firm,
+\formula{ufcf}
+  UFCF=EBIT(1-\tau)+D\&A-Capex-\Delta NWC,
+\closeformula
+where $\tau$ is the tax rate, $D\&A$ is depreciation and amortisation, $Capex$ is capital expenditure, and $\Delta NWC$ is the increase in net working capital. A terminal value using perpetual growth is
+\formula{terminal}
+  TV_T=\frac{UFCF_{T+1}}{WACC-g}=\frac{UFCF_T(1+g)}{WACC-g}.
+\closeformula
+The denominator requires $WACC>g$. The enterprise value is the present value of forecast UFCF and terminal value. To obtain equity value, subtract debt and debt-like claims and add excess cash and other non-operating assets, using consistent definitions.
+
+\section{Cost of capital}
+The weighted average cost of capital is a capital-structure-weighted required return:
+\formula{wacc}
+  WACC=\frac{E}{D+E}r_E+\frac{D}{D+E}r_D(1-\tau),
+\closeformula
+where $E$ and $D$ are market values of equity and debt, $r_E$ is the required return on equity, $r_D$ is the pre-tax cost of debt, and $\tau$ is the marginal tax rate under the assumed tax treatment. Using book weights, mixing nominal and real rates, or applying a firm-wide WACC to a project with different risk can produce false precision.
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Find the present value of 10,000 received in four years at 6 percent annual compounding.
+  \item A nominal return is 7 percent and inflation is 2 percent. Compute the exact real return and the approximation.
+  \item A project costs 1,000 today and pays 600 in each of two years. At 10 percent, calculate NPV.
+  \item Why must a terminal-growth rate be below the discount rate in the Gordon formula?
+\end{enumerate}
+\end{exerciseblock}

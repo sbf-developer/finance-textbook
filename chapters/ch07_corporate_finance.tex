@@ -1,0 +1,44 @@
+\chapter{Corporate Finance, Capital Structure, and Governance}
+
+\section{The investment decision}
+Corporate finance asks how a firm should raise, invest, and distribute capital. The investment decision starts with incremental after-tax cash flows: only cash flows caused by the project belong in the analysis. Sunk costs are excluded; opportunity costs are included; working-capital commitments and terminal recovery matter.
+
+For a project with initial cost $I_0$, operating cash flows $OCF_t$, terminal cash flow $TV_T$, and discount rate $r$,
+\formula{projectnpv}
+  NPV=-I_0+\sum_{t=1}^{T}\frac{OCF_t}{(1+r)^t}+\frac{TV_T}{(1+r)^T}.
+\closeformula
+A positive NPV means that, under the cash-flow and discount-rate assumptions, the project exceeds the opportunity cost of capital. It does not mean the project is riskless.
+
+\section{Capital structure}
+Debt can provide tax benefits and discipline but creates fixed obligations, distress risk, restrictions, and agency conflicts. Equity absorbs losses and has no contractual maturity but may be more expensive or dilute control. The optimal structure is not a universal debt ratio; it depends on assets, taxes, bankruptcy costs, flexibility, information, governance, and market conditions.
+
+Under highly restrictive assumptions of frictionless markets, no taxes, no distress costs, and fixed investment policy, Modigliani and Miller show that firm value is independent of financing choice \cite{modigliani1958}. Adding corporate taxes creates a debt tax shield in the classic model \cite{modigliani1963}. These propositions are benchmarks that reveal which frictions make financing relevant; they are not recommendations to maximise leverage.
+
+\section{Cost of equity and debt}
+The CAPM cost-of-equity expression is introduced formally in Chapter 9. In a simple corporate model, the cost of debt is the rate lenders require for the firm's credit and maturity. The interest tax shield is not free: deductibility depends on tax law, taxable income, limitations, and the firm's ability to use the deduction. A WACC based on an arbitrary historical debt ratio can be inconsistent with the financing policy being evaluated.
+
+\section{Payout and agency}
+Dividends and repurchases return cash to investors. Retention can fund positive-NPV growth, while unnecessary retention can allow managerial empire-building. Agency problems arise when managers, shareholders, creditors, employees, or other stakeholders have different objectives and information. Contracts, board oversight, disclosure, incentive design, covenants, takeover markets, and law only partially solve the problem.
+
+\section{Governance and stakeholder claims}
+Governance is the allocation of control and accountability. A narrow shareholder-value model can clarify residual cash-flow rights but may omit externalities, workers, creditors, communities, and future claimants. A broader stakeholder view does not eliminate the need for measurement; it changes which objectives and constraints belong in the decision.
+
+\section{Real options}
+An investment may create the right, but not the obligation, to expand, delay, abandon, or switch. The option value of flexibility increases with uncertainty, time, and the ability to respond, but decreases with costs of exercising. A rigid NPV can undervalue projects with staged learning. Real-option reasoning is useful when the option is genuinely actionable and the state variables can be estimated; it becomes storytelling when flexibility is merely asserted.
+
+\begin{worked}
+A project requires 100 today and pays 70 in each of two years. At 10 percent, $NPV=-100+70/1.1+70/1.1^2\approx21.49$. If the project also creates a decision to expand for 60 in year 2 when demand is high, the expansion option must be valued from its conditional cash flows rather than added as an unexamined percentage uplift.
+\end{worked}
+
+\section{Decision quality}
+A defensible corporate-finance memorandum shows the base case, downside case, and the assumptions that drive the result. It states whether cash flows are nominal or real, whether taxes are cash taxes, how working capital is treated, how terminal value is constructed, and which risks are already reflected in the discount rate. Sensitivity analysis is not a substitute for scenario logic; it reveals local dependence, while scenarios describe coherent joint changes.
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Give one example of a sunk cost and one example of an opportunity cost in a project decision.
+  \item State two assumptions behind the Modigliani-Miller irrelevance proposition and explain how one real-world friction breaks it.
+  \item A firm has debt 40, equity 60, cost of debt 5 percent, cost of equity 10 percent, and tax rate 25 percent. Compute WACC.
+  \item Why might a staged investment have value beyond the NPV of immediate full-scale investment?
+\end{enumerate}
+\end{exerciseblock}
+

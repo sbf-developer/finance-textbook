@@ -1,0 +1,60 @@
+\chapter{Numerical Methods and Quantitative Strategies}
+
+\section{Why numerical methods matter}
+Many finance problems have no closed-form solution. A path-dependent option, a portfolio with realistic constraints, a stochastic-volatility model, or a large calibration problem requires numerical approximation. Numerical output is not automatically accurate: discretisation error, sampling error, optimisation error, coding error, and model error must be separated.
+
+\section{Monte Carlo simulation}
+Suppose a claim pays $X$ at time $T$ and has value $V=\E^{\mathbb Q}[e^{-rT}X]$. Simulate $M$ independent draws $X_1,\ldots,X_M$ under the pricing model and estimate
+\formula{montecarlo}
+  \hat V=\frac{1}{M}\sum_{m=1}^{M}e^{-rT}X_m.
+\closeformula
+The standard error is approximately $s_{discounted}/\sqrt M$. Increasing $M$ reduces sampling error at a square-root rate: obtaining one tenth of the standard error requires roughly one hundred times as many paths. Variance reduction methods include antithetic variates, control variates, stratification, and importance sampling.
+
+To simulate GBM with time step $\Delta t$, one Euler-style exact-in-log step is
+\formula{gbmstep}
+  S_{t+\Delta t}=S_t\exp\left[(\mu-\tfrac12\sigma^2)\Delta t+\sigma\sqrt{\Delta t}Z_t\right],
+\closeformula
+where each $Z_t$ is standard normal. The risk-neutral drift replaces $\mu$ with the appropriate pricing drift. The algorithm should state the measure, seed, time convention, and whether the payoff is discounted.
+
+\section{Optimisation}
+A constrained portfolio problem can be written
+\formula{optimisation}
+  \min_{\mathbf w}\quad \mathbf w^{\mathsf T}\boldsymbol\Sigma\mathbf w
+\closeformula
+subject to $\mathbf 1^{\mathsf T}\mathbf w=1$, expected-return constraints, bounds, turnover limits, and factor exposures. Quadratic programming is appropriate for this convex case. If the covariance estimate is unstable, regularisation or shrinkage can improve numerical conditioning. An optimiser can produce a precise answer to an imprecise input problem.
+
+\section{Calibration}
+Calibration chooses model parameters so model prices or moments match observed market quantities. A least-squares objective may be
+\formula{calibration}
+  \min_{\theta}\sum_{j=1}^{J}\omega_j\left(P_j^{model}(\theta)-P_j^{market}\right)^2,
+\closeformula
+where $\theta$ is the parameter vector and $\omega_j$ are weights. A small pricing error does not imply a reliable hedge. Parameters can be weakly identified, prices can contain noise, and the model can fit one region while failing elsewhere.
+
+\section{Quantitative strategy design}
+A quantitative strategy is a sequence: define the universe, construct signals using information available at each date, map signals to positions, execute with constraints, record cash flows and costs, and evaluate risk. A clean separation among signal, portfolio, execution, and accounting layers makes errors detectable.
+
+Common portfolio maps include rank-weighted signals, volatility scaling, equal risk contribution, minimum variance, and factor-neutral portfolios. Every map encodes objectives. Volatility targeting can reduce exposure when volatility rises, but it can also de-risk after a fall and re-enter after a recovery; behaviour depends on path and rebalance timing.
+
+\section{Numerical differentiation and Greeks}
+A finite-difference delta is
+\formula{finitedelta}
+  \Delta\approx\frac{V(S+h)-V(S-h)}{2h}.
+\closeformula
+Central differences are often more accurate than one-sided differences for a smooth function, but a very small $h$ can magnify floating-point error and a large $h$ can introduce truncation error. Automatic differentiation or analytic derivatives can be preferable.
+
+\section{Reproducibility}
+A quantitative result should record source data, timestamps, adjustment rules, units, random seeds, package versions, model parameters, optimisation status, and test results. Deterministic seeds make a simulation reproducible but do not make its assumptions true. A notebook without a clean run from a fresh environment is not a robust research artifact.
+
+\begin{worked}
+If a Monte Carlo estimate has discounted-payoff sample standard deviation 12 and uses 3,600 paths, its estimated standard error is $12/\sqrt{3600}=0.2$. To cut that sampling error in half, use approximately 14,400 paths. This calculation says nothing about whether the model's drift, volatility, or payoff specification is appropriate.
+\end{worked}
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Why does Monte Carlo error decrease slowly as paths increase?
+  \item Give two constraints that can make an optimised portfolio more implementable.
+  \item What is the difference between calibration error and model error?
+  \item Why should a backtest store the timestamp at which each input became available?
+\end{enumerate}
+\end{exerciseblock}
+

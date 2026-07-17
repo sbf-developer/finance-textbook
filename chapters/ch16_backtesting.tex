@@ -1,0 +1,54 @@
+\chapter{Backtesting, Market Microstructure, and Algorithmic Trading}
+
+\section{A backtest is a historical experiment}
+A backtest applies a fully specified decision rule to information that would have been available at each historical date. It is not a replay in which future knowledge is silently available. A minimal backtest records positions, prices, cash, dividends, financing, fees, slippage, and corporate actions.
+
+The gross simple return of a strategy with position $w_{t-1}$ and asset return $R_t$ is $w_{t-1}R_t$. A simple cost model is
+\formula{costmodel}
+  R_t^{net}=w_{t-1}R_t-c_{fixed,t}-c_{spread,t}-c_{impact,t}-c_{borrow,t},
+\closeformula
+with every cost measured in portfolio-return units. The position must be determined before the return is realised.
+
+\section{Biases}
+\begin{itemize}
+  \item \textbf{Look-ahead bias}: using a value before its publication or after a future revision.
+  \item \textbf{Survivorship bias}: analysing only entities that survived, excluding delisted or failed names.
+  \item \textbf{Selection bias}: trying many universes, signals, parameters, and periods but reporting one.
+  \item \textbf{Data-snooping bias}: repeatedly adapting to the same sample.
+  \item \textbf{Execution bias}: assuming fills at a closing price or mid-price without proving feasibility.
+  \item \textbf{Corporate-action bias}: failing to adjust for splits, dividends, mergers, or delistings consistently.
+\end{itemize}
+
+Walk-forward validation trains or calibrates on a past window and evaluates on a later window. A final untouched test set should be used once. Cross-validation for time series must preserve order. If labels overlap, the split must prevent information from leaking across the boundary.
+
+\section{Performance and risk statistics}
+The Sharpe ratio is
+\formula{sharpe}
+  SR=\frac{\E[R_p-R_f]}{\sigma(R_p-R_f)}.
+\closeformula
+Its sample estimate is noisy and can be inflated by non-normality, smoothing, leverage, serial correlation, and selection. Maximum drawdown is the largest peak-to-trough decline in a wealth path. Turnover is a measure of trading volume relative to portfolio size; the denominator and rebalancing convention must be stated.
+
+\section{Market microstructure}
+A limit order specifies a price constraint; a market order prioritises immediate execution. The bid-ask spread compensates liquidity providers for inventory, adverse selection, processing, and capital. The order book is a queue, not a guaranteed reservoir of liquidity. A displayed quote can disappear, and the price impact of a trade depends on size, urgency, volatility, and information.
+
+Price changes may contain bid-ask bounce, discreteness, latency, stale quotes, and asynchronous observations. High-frequency strategies face exchange fees, co-location, message limits, technology failures, and competition. A signal that is strong at daily frequency may be untradeable at the required intraday horizon.
+
+\section{Algorithmic trading}
+An algorithmic execution system needs a signal or parent order, schedule, venue logic, risk limits, kill switch, logging, monitoring, and incident response. It should fail safely under stale data, duplicate orders, rejected messages, clock drift, and partial fills. The code is part of the control environment, not only an implementation detail.
+
+\section{Fintech and data}
+Fintech can reduce access costs, automate underwriting, embed payments, and create new forms of intermediation. It can also concentrate operational dependencies, amplify rapid withdrawal, expose personal data, and obscure model decisions. Alternative data raises legal, privacy, licensing, and representativeness questions. Data provenance is a financial control.
+
+\begin{worked}
+A strategy starts with 100. It grows 12 percent, falls 8 percent, then grows 5 percent. Wealth is $100(1.12)(0.92)(1.05)=108.19$. The peak before the fall is 112, so the drawdown is $(108.19-112)/112=-3.40\%$ at the end. Reporting only the average of 12, -8, and 5 percent would hide the path.
+\end{worked}
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Give an example of look-ahead bias in an earnings-based strategy.
+  \item Why can a mid-price backtest overstate capacity?
+  \item Define maximum drawdown in words.
+  \item Name two operational controls that an algorithmic trading system should have.
+\end{enumerate}
+\end{exerciseblock}
+

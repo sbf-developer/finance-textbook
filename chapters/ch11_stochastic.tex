@@ -1,0 +1,63 @@
+\chapter{Stochastic Processes, Volatility, and Financial Econometrics}
+
+\section{From random variables to processes}
+A \keyterm{stochastic process} is a collection of random variables indexed by time, written $\{X_t:t\geq0\}$. A process models information arriving through time, not just uncertainty about one final outcome. The filtration $\{\mathcal{F}_t\}$ represents information available by time $t$.
+
+A random walk is
+\formula{randomwalk}
+  X_t=X_{t-1}+\mu+\varepsilon_t,
+\closeformula
+where $\mu$ is drift and shocks $\varepsilon_t$ have mean zero. If shocks are independent with finite variance, increments accumulate and the level becomes more dispersed over time. A random walk in prices does not imply that returns are unforecastable in every sense; it is a model whose assumptions need testing.
+
+\section{Brownian motion and geometric Brownian motion}
+Standard Brownian motion $W_t$ starts at zero, has independent increments, and $W_{t+h}-W_t\sim N(0,h)$. Its paths are continuous but nowhere differentiable in the ordinary sense. A common continuous-time price model is geometric Brownian motion:
+\formula{gbm}
+  \dd S_t=\mu S_t\dd t+\sigma S_t\dd W_t,
+\closeformula
+where $S_t$ is price, $\mu$ is instantaneous expected growth, $\sigma>0$ is instantaneous volatility, and $\dd W_t$ is a Brownian increment. The stochastic term scales with price, so the model preserves positivity.
+
+Applying Ito's lemma to $\log S_t$ gives
+\formula{loggbm}
+  \dd\log S_t=\left(\mu-\frac{1}{2}\sigma^2\right)\dd t+\sigma\dd W_t.
+\closeformula
+The term $-\sigma^2/2$ is the Ito correction. It explains why arithmetic expected growth and compound growth are different. For horizon $T$,
+\formula{gbmsolution}
+  S_T=S_0\exp\left[\left(\mu-\frac{1}{2}\sigma^2\right)T+\sigma\sqrt{T}Z\right],\qquad Z\sim N(0,1).
+\closeformula
+
+\section{Risk-neutral valuation}
+Under a risk-neutral pricing measure $\mathbb{Q}$, tradable assets earn the short rate after adjusting for payouts, and a claim's value can be represented as a discounted expectation:
+\formula{riskneutral}
+  V_0=\E^{\mathbb{Q}}\left[\exp\left(-\int_0^Tr_s\dd s\right)X_T\right].
+\closeformula
+The superscript $\mathbb{Q}$ is essential. This is not a claim that investors are actually risk-neutral. It is a pricing representation made possible by no-arbitrage and a change of probability measure under assumptions about completeness and funding.
+
+\section{Volatility models}
+Historical volatility estimates dispersion of observed returns. A simple annualised estimate from daily log returns $r_t$ is
+\formula{histvol}
+  \hat\sigma_{ann}=\sqrt{K}\,s(r_t),
+\closeformula
+where $K$ is the number of observations per year under the convention and $s$ is sample standard deviation. The square-root-of-time rule assumes sufficiently stable and weakly dependent increments; volatility clustering and jumps weaken it.
+
+An ARCH or GARCH model allows conditional variance to depend on past shocks. A basic GARCH(1,1) specification is
+\formula{garch}
+  \sigma_t^2=\omega+\alpha\varepsilon_{t-1}^2+\beta\sigma_{t-1}^2,
+\closeformula
+with $\omega>0$, $\alpha,\beta\geq0$, and often $\alpha+\beta<1$ for covariance stationarity. The persistence parameter is informative but not a structural constant; it can change in crises.
+
+\section{Econometric discipline}
+Return data require choices about simple versus log returns, corporate actions, delistings, stale prices, time zones, bid-ask bounce, and missing observations. Volatility estimates should report the sampling frequency, annualisation factor, window, and whether returns are overlapping. A model's fit does not establish that it predicts the future or that its parameters are stable.
+
+\begin{worked}
+If 252 daily log returns have sample standard deviation 1.2 percent, a conventional annualised volatility is $\sqrt{252}(0.012)\approx19.05\%$. This is a scaling convention. It is not an exact forecast when volatility changes, trading days differ, or returns are serially dependent.
+\end{worked}
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item In the GBM solution, what is the role of $Z$?
+  \item Why is the risk-neutral measure not the same as the real-world probability measure?
+  \item Annualise a daily volatility of 0.8 percent using 252 observations per year.
+  \item Under GARCH(1,1), what qualitative effect does a large lagged shock have on next-period conditional variance?
+\end{enumerate}
+\end{exerciseblock}
+

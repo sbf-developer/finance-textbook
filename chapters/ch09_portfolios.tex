@@ -1,0 +1,64 @@
+\chapter{Portfolio Theory and Asset Pricing}
+
+\section{Portfolio arithmetic}
+Let $w_i$ be the portfolio weight in asset $i$, with $\sum_iw_i=1$, and $R_i$ its return. Portfolio return is
+\formula{portreturn}
+  R_p=\sum_{i=1}^{n}w_iR_i=\mathbf{w}^{\mathsf T}\mathbf{R}.
+\closeformula
+Weights can be negative when short selling is allowed. The expected portfolio return is $\E[R_p]=\mathbf{w}^{\mathsf T}\boldsymbol\mu$, where $\boldsymbol\mu$ contains expected asset returns. Portfolio variance is
+\formula{portvariance}
+  \Var(R_p)=\mathbf{w}^{\mathsf T}\boldsymbol\Sigma\mathbf{w},
+\closeformula
+where $\boldsymbol\Sigma$ is the covariance matrix. In scalar notation, the same expression is $\sum_iw_i^2\sigma_i^2$ plus twice the sum of weighted pairwise covariances. Covariance, not just the number of holdings, creates diversification.
+
+\section{Mean-variance choice}
+A mean-variance investor chooses weights to maximise
+\formula{meanvariance}
+  \max_{\mathbf{w}}\quad \mathbf{w}^{\mathsf T}\boldsymbol\mu-\frac{\lambda}{2}\mathbf{w}^{\mathsf T}\boldsymbol\Sigma\mathbf{w},
+\closeformula
+subject to constraints such as $\mathbf{1}^{\mathsf T}\mathbf{w}=1$. The parameter $\lambda>0$ represents risk aversion in this quadratic objective. The model compresses all preferences into expected return and variance; it is exact only for quadratic utility or elliptical return distributions, and is an approximation otherwise.
+
+The efficient frontier is the set of portfolios with the highest expected return for each feasible variance, or the lowest variance for each expected return. Estimation error can make an unconstrained optimizer choose extreme positions. Constraints, shrinkage, robust optimisation, and resampling are ways to reduce sensitivity, but each adds assumptions.
+
+\section{Two-asset intuition}
+For two assets, portfolio variance is
+\formula{twoassetvariance}
+  \sigma_p^2=w^2\sigma_1^2+(1-w)^2\sigma_2^2+2w(1-w)\rho_{12}\sigma_1\sigma_2.
+\closeformula
+If correlation $\rho_{12}<1$, the combined portfolio can have lower volatility than a weighted average of individual volatilities. If correlation rises during a crisis, the diversification benefit can shrink exactly when needed most.
+
+\section{CAPM}
+The capital asset pricing model states, under a restrictive equilibrium model,
+\formula{capm}
+  \E[R_i]-R_f=\beta_i\left(\E[R_M]-R_f\right),
+\closeformula
+where $R_f$ is the risk-free return, $R_M$ is the market-portfolio return, and
+\formula{beta}
+  \beta_i=\frac{\Cov(R_i,R_M)}{\Var(R_M)}.
+\closeformula
+Beta measures exposure to the market factor in the model. The market risk premium is not directly observed and varies by sample, horizon, market definition, and expectations. CAPM is a benchmark for opportunity cost and risk decomposition, not a complete explanation of realised returns.
+
+The capital market line relates expected return to total volatility for efficient combinations of the risk-free asset and tangency portfolio. The security market line relates expected return to beta. These are different lines because one uses total risk and the other systematic risk under the model.
+
+\section{Factor models}
+A linear factor model is
+\formula{factormodel}
+  R_{i,t}-R_{f,t}=\alpha_i+\boldsymbol\beta_i^{\mathsf T}\mathbf{f}_t+\varepsilon_{i,t},
+\closeformula
+where $\mathbf{f}_t$ is a vector of factor returns and $\boldsymbol\beta_i$ are exposures. Fama and French's 1993 model identified market, size, book-to-market, maturity, and default-related factors as common sources of variation in stocks and bonds \cite{famafrench1993}. Later models add profitability, investment, momentum, quality, liquidity, or macro factors. A factor's existence, economic meaning, tradability, and persistence are separate questions.
+
+\section{Risk premia and limits}
+An expected return can compensate for bearing risk, supplying liquidity, providing insurance, or accepting an unpleasant payoff in bad states. A high historical average may also reflect luck, measurement error, data mining, or a changing market. Asset pricing is therefore a joint exercise in theory, measurement, and institutional feasibility.
+
+\begin{worked}
+Two assets have expected returns 8 and 5 percent, volatilities 15 and 8 percent, and correlation 0.20. A 60/40 portfolio has expected return $0.6(0.08)+0.4(0.05)=6.8\%$. Its variance is $0.6^2(0.15)^2+0.4^2(0.08)^2+2(0.6)(0.4)(0.20)(0.15)(0.08)=0.010276$, so volatility is about $10.14\%$. The covariance term is what distinguishes portfolio risk from a weighted average.
+\end{worked}
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Two assets have volatilities 20 and 10 percent, correlation 0, and equal weights. Calculate portfolio volatility.
+  \item If an asset has covariance 0.018 with the market and market variance 0.0225, calculate beta.
+  \item State one assumption required to interpret a factor-regression intercept as abnormal performance.
+  \item Why can an unconstrained mean-variance optimizer generate implausibly large positions?
+\end{enumerate}
+\end{exerciseblock}

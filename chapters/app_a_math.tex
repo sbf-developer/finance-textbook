@@ -1,0 +1,34 @@
+\chapter{Mathematical Toolkit}
+
+\section{Notation and units}
+The set $\R$ contains real numbers. Vectors are written in bold, such as $\mathbf{x}$, and $\mathbf{x}^{\mathsf T}$ denotes its transpose. A scalar is a single number. A matrix $\boldsymbol\Sigma$ contains covariances; it is symmetric when $\Sigma_{ij}=\Sigma_{ji}$.
+
+Percentages are ratios multiplied by 100. A basis point is one hundredth of a percentage point: 25 basis points equals 0.25 percentage points, or 0.0025 in decimal-rate form. A million is $10^6$ and a billion is $10^9$. Label the currency and scale in every table.
+
+\section{Logarithms and exponentials}
+The natural logarithm $\ln x$ is the inverse of $e^x$. It turns multiplication into addition: $\ln(ab)=\ln a+\ln b$. A continuously compounded rate uses $e^{rT}$ because the limit
+\[\lim_{m\to\infty}\left(1+\frac{r}{m}\right)^{mT}=e^{rT}.\]
+Log returns add through time: $\ln(P_T/P_0)=\sum_t\ln(P_t/P_{t-1})$. Simple returns compound multiplicatively.
+
+\section{Derivatives}
+The derivative $f'(x)$ is the limit of the change in $f$ divided by the change in $x$. It measures local sensitivity. The product rule is $(fg)'=f'g+fg'$ and the chain rule is $[f(g(x))]'=f'(g(x))g'(x)$. In finance, delta and duration are derivatives of value with respect to a risk factor.
+
+\section{Partial derivatives and Taylor approximation}
+If $V=V(x,y)$, $V_x$ holds $y$ constant and measures sensitivity to $x$. A first-order approximation is
+\formula{taylor}
+  V(x+\Delta x,y+\Delta y)\approx V(x,y)+V_x\Delta x+V_y\Delta y.
+\closeformula
+Second-order terms explain gamma and convexity. The approximation is local: large shocks, jumps, and discontinuities can invalidate it.
+
+\section{Integrals and expectations}
+An integral adds infinitesimal contributions. A density integrates to one, $\int_{-\infty}^{\infty}f(x)\dd x=1$, and the probability of an interval is the integral over that interval. Expected payoff is the integral of payoff times density. Numerical quadrature approximates it using a grid; Monte Carlo approximates it by averages.
+
+\section{Linear algebra}
+The dot product is $\mathbf{x}^{\mathsf T}\mathbf{y}=\sum_ix_iy_i$. Matrix multiplication represents linear combinations. A covariance matrix is positive semidefinite when $\mathbf{x}^{\mathsf T}\boldsymbol\Sigma\mathbf{x}\geq0$ for every vector $\mathbf{x}$; this guarantees a non-negative portfolio variance. An inverse may not exist when assets are redundant or the sample is short. Regularisation adds stability at the cost of bias.
+
+\section{Optimisation}
+An unconstrained optimum solves a first-order condition where the gradient is zero. Constraints create feasible boundaries and multipliers. A convex problem has no misleading local minima, but non-convex trading constraints, integer positions, and transaction costs can create multiple local solutions. Always check feasibility and the objective after the solver returns.
+
+\section{Probability distributions}
+For $Z\sim N(0,1)$, $\E[Z]=0$, $\Var(Z)=1$, and $N(z)=\Prob(Z\leq z)$. If $X=\mu+\sigma Z$, then $\E[X]=\mu$ and $\Var(X)=\sigma^2$. A normal model has thin tails relative to many observed financial-return samples. A Student-t model can allow heavier tails, but its degrees of freedom must be estimated and validated.
+

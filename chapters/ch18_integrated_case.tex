@@ -1,0 +1,33 @@
+\chapter{Integrated Case: A Transparent Investment Decision}
+
+\section{Case setup}
+This case integrates accounting, valuation, portfolio risk, derivatives, and governance. The company, Northstar Components, is fictional. All numbers are simulated and rounded for teaching.
+
+Northstar has current revenue of 100 million, EBIT margin of 15 percent, depreciation of 3 million, capital expenditure of 4 million, and net working capital equal to 10 percent of revenue. Revenue is forecast to grow 8, 7, 6, 5, and 4 percent over five years. EBIT margin rises gradually to 17 percent. Tax is 25 percent, and the unlevered discount rate is 9 percent. Terminal growth is 2.5 percent. Net debt is 25 million and shares outstanding are 10 million.
+
+\section{Build the cash flows}
+For each year, calculate revenue, EBIT, tax on EBIT, add back depreciation, subtract capital expenditure, and subtract the change in net working capital. The operating cash flow is not net income: it is the cash available to all providers of capital before financing flows. The workbook and Python code calculate these rows explicitly so the terminal value can be audited.
+
+\section{Terminal value and sensitivity}
+The terminal value is $UFCF_5(1+g)/(WACC-g)$. Because $g$ is close to but below the discount rate, the terminal value can be a large share of enterprise value. A sensitivity table should vary WACC and $g$ together in plausible ranges. It should not imply that the centre cell is a forecast with known precision.
+
+\section{Financing and governance questions}
+Suppose management proposes to finance expansion with debt. The incremental tax shield may add value, but debt service can reduce resilience in a downturn. The board should examine downside revenue, margin, working-capital, refinancing, and covenant scenarios. A project that has positive base-case NPV but destroys liquidity under a modest downside may not be acceptable.
+
+\section{Portfolio context}
+An investor owns 70 percent in a broad equity index, 20 percent in short-duration bonds, and 10 percent in Northstar. The relevant question is not whether Northstar has positive standalone expected return; it is how it changes portfolio risk, factor exposure, liquidity, and concentration. A private or thinly traded claim can appear diversifying because its price is stale or its value is estimated.
+
+\section{A hedge, not a prediction}
+Northstar buys a commodity input whose price is volatile. A futures hedge can reduce the budget risk of the input, but the hedge ratio must match quantity, grade, maturity, and basis. If the hedge is imperfect, the residual exposure remains. The hedge should be evaluated against the business objective, not against a desire to make the derivative profitable in isolation.
+
+\section{Decision memo checklist}
+\begin{enumerate}
+  \item State the decision, horizon, currency, and cash-flow perspective.
+  \item Reconcile the operating forecast to the statements and working-capital logic.
+  \item Show the discount-rate construction and the terminal-value convention.
+  \item Display downside scenarios and liquidity constraints.
+  \item Explain how the investment changes portfolio exposures and who bears losses.
+  \item Document data dates, simulated inputs, code version, spreadsheet checks, and unresolved uncertainties.
+\end{enumerate}
+
+The point of the case is not to produce a precise share price. It is to make the chain from assumptions to decision visible enough that a different reader can challenge it, reproduce it, and improve it.

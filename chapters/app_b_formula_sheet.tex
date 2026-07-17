@@ -1,0 +1,40 @@
+\chapter{Formula Sheet and Conventions}
+
+\small
+\begin{longtable}{@{}p{0.35\textwidth}p{0.58\textwidth}@{}}
+\toprule
+Topic & Formula or identity \\
+\midrule
+\endhead
+Future value & $FV=PV(1+r)^T$ \\
+Present value & $PV=FV/(1+r)^T$ \\
+Ordinary annuity & $PV=C[1-(1+r)^{-n}]/r$ \\
+Growing perpetuity & $PV=C_1/(r-g)$, requiring $r>g$ \\
+Holding-period return & $R=(P_1-P_0+D_1)/P_0$ \\
+Nominal-to-real & $1+r_{real}=(1+r_n)/(1+\pi)$ \\
+NPV & $\sum_{t=0}^{T}C_t/(1+r)^t$ \\
+WACC & $[E/(D+E)]r_E+[D/(D+E)]r_D(1-\tau)$ \\
+Bond price & $\sum_k CF_k/(1+y/m)^k$ \\
+Duration estimate & $\Delta P/P\approx-D_{mod}\Delta y$ \\
+Expected credit loss & $PD\times LGD\times EAD$ \\
+Portfolio return & $R_p=\mathbf w^{\mathsf T}\mathbf R$ \\
+Portfolio variance & $\sigma_p^2=\mathbf w^{\mathsf T}\boldsymbol\Sigma\mathbf w$ \\
+CAPM & $\E[R_i]-R_f=\beta_i[\E[R_M]-R_f]$ \\
+Beta & $\beta_i=\Cov(R_i,R_M)/\Var(R_M)$ \\
+Forward, no income & $F_0=S_0e^{rT}$ \\
+Forward, continuous yield & $F_0=S_0e^{(r-q)T}$ \\
+Call payoff & $\max(S_T-K,0)$ \\
+Put payoff & $\max(K-S_T,0)$ \\
+Put-call parity & $C-P=S_0e^{-qT}-Ke^{-rT}$ \\
+BSM call & $C=S_0e^{-qT}N(d_1)-Ke^{-rT}N(d_2)$ \\
+BSM terms & $d_1=[\ln(S_0/K)+(r-q+\sigma^2/2)T]/(\sigma\sqrt T)$; $d_2=d_1-\sigma\sqrt T$ \\
+Monte Carlo & $\hat V=M^{-1}\sum_m e^{-rT}X_m$ \\
+Normal VaR & $VaR\approx z_\alpha\sigma V$ when mean is zero and loss is normal \\
+Expected shortfall & $ES_\alpha=\E[L\given L\geq VaR_\alpha]$ for a continuous loss distribution \\
+Sharpe ratio & $SR=\E[R-R_f]/\sigma(R-R_f)$ \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+Every entry requires compatible units, compounding, settlement, and cash-flow timing. Formula reuse without convention checks is a common source of error.
+

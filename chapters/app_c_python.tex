@@ -1,0 +1,42 @@
+\chapter{Python Laboratory}
+
+The companion directory \texttt{code/} contains a small, tested module named \texttt{finance\_models.py}. It uses NumPy and pandas for numerical work and matplotlib only for optional figures. The functions are intentionally transparent: a reader should be able to compare each line with the formulas in the chapters.
+
+\section{Example: time value and bonds}
+\begin{lstlisting}[language=Python]
+from finance_models import pv, bond_price
+
+present = pv(10_000, rate=0.06, periods=4)
+price = bond_price(face=1_000, coupon_rate=0.05,
+                   yield_rate=0.04, maturity=2)
+print(round(present, 2), round(price, 2))
+\end{lstlisting}
+
+\section{Example: BSM and Monte Carlo}
+\begin{lstlisting}[language=Python]
+from finance_models import bsm_call, simulate_gbm, monte_carlo_call
+
+analytic = bsm_call(100, 100, 0.05, 0.20, 1.0)
+paths = simulate_gbm(100, 0.05, 0.20, 1.0,
+                     steps=252, paths=20_000, seed=7)
+mc = monte_carlo_call(paths[:, -1], 100, 0.05, 1.0)
+print(analytic, mc)
+\end{lstlisting}
+
+The Monte Carlo result should approach the analytic value as the number of paths increases, but it will not match exactly because it is a random estimate. The code reports a standard error so the difference can be interpreted rather than hidden.
+
+\section{Example: portfolio and risk}
+\begin{lstlisting}[language=Python]
+from finance_models import portfolio_stats, historical_var_es
+
+weights = [0.6, 0.4]
+means = [0.08, 0.05]
+cov = [[0.15**2, 0.20*0.15*0.08],
+       [0.20*0.15*0.08, 0.08**2]]
+print(portfolio_stats(weights, means, cov))
+print(historical_var_es(losses, confidence=0.99))
+\end{lstlisting}
+
+\section{Testing philosophy}
+Tests cover identities, limiting cases, monotonicity, known option values, shapes, reproducible seeds, and risk-statistic ordering. A passing test suite establishes that the implementation matches its test specification; it does not validate the economic model or data quality. New models should add tests before adding optimisation or deployment logic.
+

@@ -1,0 +1,37 @@
+\chapter{Market Efficiency, Behaviour, and Empirical Anomalies}
+
+\section{Efficiency as a conditional hypothesis}
+The efficient-market hypothesis (EMH) concerns how prices incorporate information. In a weak form, past prices and returns are not expected to provide a systematically profitable signal after costs. In a semi-strong form, publicly available information is incorporated. In a strong form, even private information is reflected. Strong form efficiency is generally incompatible with the existence of informed insiders who profit from private information, so the forms are not interchangeable.
+
+Efficiency is a joint statement about information, equilibrium, trading costs, risk, and the researcher's test. A price can be approximately efficient while some investors have private information or while predictable patterns exist that are too costly or risky to trade. A failed trading rule is not proof of efficiency; a successful backtest is not proof of inefficiency.
+
+\section{Behavioural mechanisms}
+Investors may display loss aversion, probability-weighting errors, overconfidence, attention constraints, anchoring, extrapolation, and social imitation. Prospect theory models reference dependence and asymmetric sensitivity to gains and losses \cite{kahneman1979}. Such mechanisms can affect prices when they are shared, persistent, and not fully offset by arbitrageurs.
+
+\section{Anomalies and competing explanations}
+Empirical anomalies include value, momentum, size, post-earnings-announcement drift, short-term reversal, issuance effects, and calendar patterns. A pattern may reflect a risk premium, a behavioural bias, limits to arbitrage, microstructure frictions, data construction, or chance. Fama and French's factor work is an influential example of measuring common variation; it does not prove that every factor is a causal risk premium.
+
+A credible anomaly should survive reasonable definitions, alternative samples, transaction costs, liquidity constraints, out-of-sample tests, and competing factor controls. Publication selection means that the literature's visible effect sizes can be larger than the underlying average effect. Data snooping is especially serious when a researcher tries many signals and reports only the winner; White's reality-check approach formalised part of this concern \cite{white2000}.
+
+\section{Limits to arbitrage}
+Even when a security is mispriced, arbitrage may be delayed or impossible. The trade may require funding, shorting, collateral, patience, and risk tolerance. The mispricing can widen before it closes. A strategy can be theoretically profitable but practically unattractive after market impact, borrow fees, taxes, capacity limits, and tail losses.
+
+\section{Interpretation of evidence}
+An empirical result should state the sample, frequency, universe, data-cleaning choices, timing, benchmark, fees, and statistical procedure. Confidence intervals express sampling uncertainty under a model. Economic significance is distinct from statistical significance. A large t-statistic on a tiny return may not cover costs; a modest t-statistic can still matter if capacity is high and the effect is stable.
+
+\begin{worked}
+Suppose a momentum rule has a backtest Sharpe ratio of 1.2 before costs. If annualised turnover is high and estimated costs reduce return by 3 percentage points, the post-cost Sharpe can be far lower. If the rule was selected from 200 variants, the reported ratio also needs a selection adjustment or an untouched validation period. The number 1.2 alone is not evidence of a deployable edge.
+\end{worked}
+
+\section{What survives uncertainty}
+The practical implication is not that markets are perfectly efficient or easily beaten. It is to match claims to evidence. Diversification, attention to costs, tax awareness, liquidity planning, and explicit risk limits are robust principles even when expected-return forecasts are uncertain. Strong claims about alpha require stronger designs than a compelling chart.
+
+\begin{exerciseblock}
+\begin{enumerate}
+  \item Distinguish weak-form and semi-strong efficiency.
+  \item Give two mechanisms that can make an observed anomaly disappear after publication.
+  \item Why does a successful backtest not establish causality?
+  \item List four pieces of information that should accompany a reported strategy return.
+\end{enumerate}
+\end{exerciseblock}
+
